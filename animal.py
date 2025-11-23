@@ -13,3 +13,10 @@ class Animal:
         self.species = species
         self.age = age
         self.diet = diet
+
+    def eat(self):
+        pass
+    def sleep(self):
+        pass
+    def make_sound(self):
+        pass
