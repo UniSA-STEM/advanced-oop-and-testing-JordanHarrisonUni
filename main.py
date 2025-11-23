@@ -65,5 +65,36 @@ def main():
     print(savannah_enclosure.get_status())
     print(aviary.get_status())
 
+    print("\n--- Staff Actions ---")
+
+    # Zookeeper feeds animals
+    print(keeper_john.feed_animal(simba))
+
+    # Zookeeper cleans the enclosure
+    print(keeper_john.clean_enclosure(savannah_enclosure))
+
+    # Veterinarian checks health (should be empty at first)
+    print(vet_emily.check_health(simba))
+
+    # Create a health issue for Simba
+    simba_injury = HealthRecord(
+        description="Minor leg injury",
+        severity="medium",
+        date_reported="2025-11-23",
+        treatment="Rest"
+    )
+
+    print(vet_emily.add_health_issue(simba, simba_injury))
+
+    # Vet checks health again (now shows the record)
+    print(vet_emily.check_health(simba))
+
+    # Vet treats Simba
+    print(vet_emily.treat_animal(simba, "Applied bandage and prescribed rest"))
+
+    # Final health summary
+    print(vet_emily.check_health(simba))
+
+
 if __name__ == "__main__":
     main()
