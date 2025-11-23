@@ -23,18 +23,20 @@ from health_record import HealthRecord
 def main():
     print("Zoo Management System Demo Starting...\n")
 
+    # Create animals
     simba = Mammal("Simba", "Lion", 5, "meat")
     polly = Bird("Polly", "Parrot", 2, "seeds")
 
     print(f"Created animal: {simba.name}, a {simba.species}")
     print(f"Created animal: {polly.name}, a {polly.species}")
+
     # Create enclosures
     savannah_enclosure = Enclosure(
         "Savannah Habitat",
         "savannah",
         500,
         80,
-        [Mammal]   # accepts mammals only
+        [Mammal]
     )
 
     aviary = Enclosure(
@@ -42,10 +44,10 @@ def main():
         "forest",
         200,
         90,
-        [Bird]     # accepts birds only
+        [Bird]
     )
 
-    # Add animals to their enclosures
+    # Add animals to enclosures
     print(savannah_enclosure.add_animal(simba))
     print(aviary.add_animal(polly))
 
@@ -65,7 +67,7 @@ def main():
     print(savannah_enclosure.get_status())
     print(aviary.get_status())
 
-    print("\n--- Staff Actions ---")
+    print("\nStaff Actions\n")
 
     # Zookeeper feeds animals
     print(keeper_john.feed_animal(simba))
@@ -73,10 +75,10 @@ def main():
     # Zookeeper cleans the enclosure
     print(keeper_john.clean_enclosure(savannah_enclosure))
 
-    # Veterinarian checks health (should be empty at first)
+    # Veterinarian checks health (no records yet)
     print(vet_emily.check_health(simba))
 
-    # Create a health issue for Simba
+    # Add a health issue for Simba
     simba_injury = HealthRecord(
         description="Minor leg injury",
         severity="medium",
@@ -86,7 +88,7 @@ def main():
 
     print(vet_emily.add_health_issue(simba, simba_injury))
 
-    # Vet checks health again (now shows the record)
+    # Check health again (now shows the issue)
     print(vet_emily.check_health(simba))
 
     # Vet treats Simba
@@ -94,7 +96,6 @@ def main():
 
     # Final health summary
     print(vet_emily.check_health(simba))
-
 
 if __name__ == "__main__":
     main()

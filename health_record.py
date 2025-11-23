@@ -8,8 +8,12 @@ This is my own work as defined by the University's Academic Integrity Policy.
 '''
 
 class HealthRecord:
-    # Validate data values of given attributes
     def __init__(self, description, severity, date_reported, treatment):
+
+        # Validate data values of given attributes
+        # For string instances, we check it is a string and not null
+        # All fields of a health record must be strings and must not be empty,
+        # as they are required to meaningfully describe the health issue
         if not isinstance(description, str) or not description:
             raise ValueError("Invalid description")
         if not isinstance(severity, str) or not severity:

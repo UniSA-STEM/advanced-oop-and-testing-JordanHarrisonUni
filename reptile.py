@@ -11,7 +11,9 @@ from animal import Animal
 
 class Reptile(Animal):
     def __init__(self, name, species, age, diet):
+        # Reptiles have a default sound of "hiss"
         super().__init__(name, species, age, diet, "hiss")
 
     def bask(self):
+        # Behaviour specific to reptiles
         return f"{self.name} is basking in the sun."

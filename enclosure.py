@@ -10,21 +10,18 @@ This is my own work as defined by the University's Academic Integrity Policy.
 class Enclosure:
     def __init__(self, name, environment_type, size, cleanliness_level, allowed_animal_types):
 
-        # Validate string values
+        # Validate data values of given attributes
+        # For string instances, we check it is a string and not null
+        # For int instances, we check it is an int and meets required conditions
+        # For lists (allowed_animal_types), check it is a non-empty list of class types
         if not isinstance(name, str) or not name:
             raise ValueError("Invalid name")
         if not isinstance(environment_type, str) or not environment_type:
             raise ValueError("Invalid environment type")
-
-        # Validate size
         if not isinstance(size, int) or size <= 0:
             raise ValueError("Invalid size")
-
-        # Validate cleanliness level (0–100)
         if not isinstance(cleanliness_level, int) or not (0 <= cleanliness_level <= 100):
             raise ValueError("Invalid cleanliness level")
-
-        # Validate allowed animal types
         if not isinstance(allowed_animal_types, list) or not allowed_animal_types:
             raise ValueError("allowed_animal_types must be a non-empty list of class types")
 
@@ -37,29 +34,36 @@ class Enclosure:
         self.size = size
         self.cleanliness_level = cleanliness_level
         self.allowed_animal_types = allowed_animal_types
-        
-        # Start with an empty list of animals inside the enclosure
+
+        # Initially the enclosure contains no animals
         self.animals = []
 
     def add_animal(self, animal):
-        # Check if animal matches any allowed type
+        # Check if the animal is allowed in this enclosure
         if not any(isinstance(animal, allowed) for allowed in self.allowed_animal_types):
             raise ValueError("This animal type is not allowed in this enclosure.")
-        
+
+        # Prevent duplicate animals being added
+        if animal in self.animals:
+            return f"{animal.name} is already in {self.name}."
+
         self.animals.append(animal)
         return f"{animal.name} has been added to {self.name}."
 
     def remove_animal(self, animal):
+        # Remove the animal if present
         if animal in self.animals:
             self.animals.remove(animal)
             return f"{animal.name} has been removed from {self.name}."
         return f"{animal.name} is not in this enclosure."
 
     def clean(self):
+        # Clean the enclosure by resetting cleanliness
         self.cleanliness_level = 100
         return f"{self.name} has been cleaned."
 
     def get_status(self):
+        # Return enclosure information in a readable format
         animal_names = [animal.name for animal in self.animals]
         return (
             f"Enclosure: {self.name}\n"

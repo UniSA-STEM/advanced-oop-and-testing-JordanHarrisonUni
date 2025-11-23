@@ -11,7 +11,9 @@ from animal import Animal
 
 class Bird(Animal):
     def __init__(self, name, species, age, diet):
+        # Birds have a default sound of "chirp"
         super().__init__(name, species, age, diet, "chirp")
 
     def fly(self):
+        # Behaviour specific to birds
         return f"{self.name} is flying."
