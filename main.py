@@ -28,6 +28,42 @@ def main():
 
     print(f"Created animal: {simba.name}, a {simba.species}")
     print(f"Created animal: {polly.name}, a {polly.species}")
+    # Create enclosures
+    savannah_enclosure = Enclosure(
+        "Savannah Habitat",
+        "savannah",
+        500,
+        80,
+        [Mammal]   # accepts mammals only
+    )
+
+    aviary = Enclosure(
+        "Aviary",
+        "forest",
+        200,
+        90,
+        [Bird]     # accepts birds only
+    )
+
+    # Add animals to their enclosures
+    print(savannah_enclosure.add_animal(simba))
+    print(aviary.add_animal(polly))
+
+    # Create staff members
+    keeper_john = Zookeeper("John")
+    vet_emily = Veterinarian("Emily")
+
+    # Assign animals and enclosures to staff
+    print(keeper_john.assign_animal(simba))
+    print(keeper_john.assign_enclosure(savannah_enclosure))
+
+    print(vet_emily.assign_animal(polly))
+    print(vet_emily.assign_enclosure(aviary))
+
+    # Print enclosure status
+    print("\nEnclosure Status:")
+    print(savannah_enclosure.get_status())
+    print(aviary.get_status())
 
 if __name__ == "__main__":
     main()
