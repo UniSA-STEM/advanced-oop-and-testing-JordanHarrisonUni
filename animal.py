@@ -30,6 +30,7 @@ class Animal:
         self.age = age
         self.diet = diet
         self.sound = sound
+        self.health_records = []
 
     def eat(self):
         return f"{self.name} is eating {self.diet}."
@@ -39,3 +40,9 @@ class Animal:
 
     def make_sound(self):
         return f"{self.name} makes a {self.sound} sound."
+    
+    def add_health_record(self, record):
+        self.health_records.append(record)
+
+    def get_health_summary(self):
+        return [str(record) for record in self.health_records]
