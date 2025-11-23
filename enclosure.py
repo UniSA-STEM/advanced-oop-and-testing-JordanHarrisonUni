@@ -8,7 +8,7 @@ This is my own work as defined by the University's Academic Integrity Policy.
 '''
 
 class Enclosure:
-    def __init__(self, name, environment_type, size, cleanliness_level, allowed_animal_type):
+    def __init__(self, name, environment_type, size, cleanliness_level, allowed_animal_types):
 
         # Validate string values
         if not isinstance(name, str) or not name:
@@ -24,15 +24,46 @@ class Enclosure:
         if not isinstance(cleanliness_level, int) or not (0 <= cleanliness_level <= 100):
             raise ValueError("Invalid cleanliness level")
 
-        # Validate allowed animal type
-        if not isinstance(allowed_animal_type, type):
-            raise ValueError("allowed_animal_type must be a class type")
+        # Validate allowed animal types
+        if not isinstance(allowed_animal_types, list) or not allowed_animal_types:
+            raise ValueError("allowed_animal_types must be a non-empty list of class types")
+
+        for animal_type in allowed_animal_types:
+            if not isinstance(animal_type, type):
+                raise ValueError("Each entry in allowed_animal_types must be a class type")
 
         self.name = name
         self.environment_type = environment_type
         self.size = size
         self.cleanliness_level = cleanliness_level
-        self.allowed_animal_type = allowed_animal_type
+        self.allowed_animal_types = allowed_animal_types
         
         # Start with an empty list of animals inside the enclosure
         self.animals = []
+
+    def add_animal(self, animal):
+        # Check if animal matches any allowed type
+        if not any(isinstance(animal, allowed) for allowed in self.allowed_animal_types):
+            raise ValueError("This animal type is not allowed in this enclosure.")
+        
+        self.animals.append(animal)
+        return f"{animal.name} has been added to {self.name}."
+
+    def remove_animal(self, animal):
+        if animal in self.animals:
+            self.animals.remove(animal)
+            return f"{animal.name} has been removed from {self.name}."
+        return f"{animal.name} is not in this enclosure."
+
+    def clean(self):
+        self.cleanliness_level = 100
+        return f"{self.name} has been cleaned."
+
+    def get_status(self):
+        animal_names = [animal.name for animal in self.animals]
+        return (
+            f"Enclosure: {self.name}\n"
+            f"Environment: {self.environment_type}\n"
+            f"Cleanliness: {self.cleanliness_level}%\n"
+            f"Animals: {', '.join(animal_names) if animal_names else 'None'}"
+        )
