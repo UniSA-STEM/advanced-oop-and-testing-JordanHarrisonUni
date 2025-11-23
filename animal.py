@@ -8,5 +8,8 @@ This is my own work as defined by the University's Academic Integrity Policy.
 '''
 
 class Animal:
-    def __init__(self):
-        pass
+    def __init__(self, name, species, age, diet):
+        self.name = name
+        self.species = species
+        self.age = age
+        self.diet = diet
