@@ -34,3 +34,11 @@ class Veterinarian(Staff):
         )
         animal.add_health_record(record)
         return f"{self.name} treated {animal.name}."
+    
+    def assign_animal(self, animal):
+        self.assigned_animals.append(animal)
+        return f"{self.name} is now responsible for {animal.name}."
+
+    def assign_enclosure(self, enclosure):
+        self.assigned_enclosures.append(enclosure)
+        return f"{self.name} is now assigned to {enclosure.name}."
