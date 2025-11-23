@@ -12,3 +12,6 @@ from animal import Animal
 class Mammal(Animal):
     def __init__(self, name, species, age, diet):
         super().__init__(name, species, age, diet, "generic mammal sound")
+
+    def walk(self):
+        return f"{self.name} is walking."
